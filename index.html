@@ -115,10 +115,6 @@
 
   }
 
-  /* ---------- Welcome ---------- */
-  .invite-line { margin: 2.25rem auto 0; text-align: center; }
-  .invite-line .small { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--muted); margin: 0; }
-  .invite-line .names { font-family: var(--script); font-size: clamp(2.6rem, 11vw, 3.6rem); color: var(--burgundy); line-height: 1.2; margin: .3rem 0; }
 
   /* ---------- Notes ---------- */
   .notes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -137,6 +133,7 @@
   .note .msg { font-family: var(--serif); font-size: 1.35rem; line-height: 1.4; margin: 0; }
   .verse { margin: 1rem 0 0; padding-left: .9rem; border-left: 2px solid var(--gold); }
   .verse p { margin: 0; font-family: var(--serif); font-style: italic; font-size: 1.08rem; line-height: 1.45; }
+  .verse u { text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
   .verse cite { display: block; margin-top: .35rem; font-style: normal; font-size: .62rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
   .note .from { font-family: var(--script); font-size: 1.6rem; color: var(--burgundy); line-height: 1; margin: 0; }
 
@@ -272,18 +269,13 @@
     <div class="wrap">
       <div class="head"><h2>Welcome</h2><div class="divider"><svg viewBox="0 0 24 24"><use href="#heart"/></svg></div></div>
       <div id="welcomeText"></div>
-      <div class="invite-line">
-        <p class="small" id="inviteLead"></p>
-        <p class="names" id="inviteNames"></p>
-        <p class="small" id="inviteRequest"></p>
-      </div>
     </div>
   </section>
 
   <!-- 3. Notes -->
   <section class="paper block" id="notes" style="padding-top:0">
     <div class="wrap">
-      <div class="head"><p class="eyebrow">From our hearts</p><h2>A few words from us</h2><div class="divider"><svg viewBox="0 0 24 24"><use href="#heart"/></svg></div></div>
+      <div class="head"><h2>A few words from us</h2><div class="divider"><svg viewBox="0 0 24 24"><use href="#heart"/></svg></div></div>
       <div class="notes" id="notesGrid"></div>
     </div>
   </section>
@@ -354,22 +346,19 @@ const WEDDING = {
   partner1: "Awele",
   partner2: "Calvin",
 
-  heroEyebrow: "Welcome to our love story",
-  tagline: "Two hearts, one cord, held together by God.",
+  heroEyebrow: "We are getting married",
+  tagline: "Two hearts, as one, until the end of time.",
   placeText: "Lagos, Nigeria",
 
-  inviteLead: "Together with their families",
-  inviteRequest: "joyfully invite you to celebrate their marriage",
-
   welcome: [
-    "We're so glad you're here! This little corner of the internet has everything you need for our wedding celebrations: where to be, when to be there, what to wear, and a few words from the two of us.",
+    "We're so glad you're here. If you're reading this, you are one of our cherished family, friends or colleagues, and we would love for you to join us as we get married. Everything you need to know about our wedding celebrations is right here, along with a few words from the two of us.",
     "Have a look around, and please reach out if you have any questions."
   ],
 
   notes: [
     { from: "Awele", photo: "awele", pos: "50% 45%", text: "God, You & Me.",
-      verse: { text: "And if one prevail against him, two shall withstand him; and a threefold cord is not quickly broken.", ref: "Ecclesiastes 4:12" } },
-    { from: "Calvin", photo: "calvin", pos: "50% 38%", text: "You've been part of our story in one way or another. We wanted you there for the best chapter yet.",
+      verse: { text: "And if one prevail against him, two shall withstand him; and a threefold cord is not quickly broken.", ref: "Ecclesiastes 4:12", underline: "a threefold cord is not quickly broken" } },
+    { from: "Calvin", photo: "calvin", pos: "50% 38%", text: "The Two Shall Be As One.",
       verse: { text: "It is not good that the man should be alone; I will make him an help meet for him.", ref: "Genesis 2:18" } },
     { from: "Both of us", photo: "together", pos: "50% 35%", story: true, text: [
       "It feels like only yesterday that our paths crossed, at the most unexpected moment of our lives. We were both corps members at Old Mc Gregor Camp, Afikpo. Who would have thought that two people from opposite ends could close the distance and choose each other against every odd?",
@@ -380,8 +369,8 @@ const WEDDING = {
   ],
 
   ceremony: [
-    "We're celebrating over two days. First comes our traditional marriage, full of colour, music, palm wine and the families who raised us. The very next day, we'll stand before God in church and make the promises we've been waiting a long time to make.",
-    "Both days will be full of joy, food, dancing and the people we love most. We'd be honoured to have you at either."
+    "We're celebrating over two days. First comes our traditional marriage, and the very next day we'll stand before God in church to make the promises we've waited so long to make.",
+    "We hope to be surrounded by our family and friends, the people we love most, and to make beautiful memories with you all. We'd be honoured to have you at either ceremony."
   ],
 
   days: [
@@ -448,14 +437,11 @@ const WEDDING = {
   $("heroEyebrow").textContent = W.heroEyebrow;
   $("heroNames").innerHTML = `${esc(W.partner1)}<span class="amp">&amp;</span>${esc(W.partner2)}`;
   $("tagline").textContent = W.tagline;
-  $("heroDates").innerHTML = W.days.map(d => `<div><b>${esc(d.date)}</b><span>${esc(d.title)}</span></div>`).join("");
+  $("heroDates").innerHTML = W.days.map(d => `<div><b>${esc(d.date)}</b></div>`).join("");
   $("place").textContent = W.placeText;
 
   // Welcome
   $("welcomeText").innerHTML = W.welcome.map(p => `<p class="lead">${esc(p)}</p>`).join("");
-  $("inviteLead").textContent = W.inviteLead;
-  $("inviteNames").textContent = couple;
-  $("inviteRequest").textContent = W.inviteRequest;
 
   // Notes
   $("notesGrid").innerHTML = W.notes.map(n => {
@@ -465,7 +451,9 @@ const WEDDING = {
       const paras = n.text.map((t, i) => `<p${i === 1 ? ' class="big"' : ""}>${esc(t)}</p>`).join("");
       return `<figure class="note story"${style}><div class="words">${paras}</div><figcaption class="from">${esc(n.from)}</figcaption></figure>`;
     }
-    const verse = n.verse ? `<blockquote class="verse"><p>${esc(n.verse.text)}</p><cite>${esc(n.verse.ref)}</cite></blockquote>` : "";
+    let vtext = n.verse ? esc(n.verse.text) : "";
+    if (n.verse && n.verse.underline) vtext = vtext.replace(esc(n.verse.underline), `<u>${esc(n.verse.underline)}</u>`);
+    const verse = n.verse ? `<blockquote class="verse"><p>${vtext}</p><cite>${esc(n.verse.ref)}</cite></blockquote>` : "";
     return `<figure class="note"${style}><div><p class="msg">${esc(n.text)}</p>${verse}</div><figcaption class="from">${esc(n.from)}</figcaption></figure>`;
   }).join("");
 
