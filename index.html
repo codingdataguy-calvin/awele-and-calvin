@@ -262,7 +262,7 @@
   <!-- 2. Welcome -->
   <section class="paper block" id="welcome">
     <div class="wrap">
-      <div class="head"><p class="eyebrow">You're invited</p><h2>Welcome</h2><div class="divider"><svg viewBox="0 0 24 24"><use href="#heart"/></svg></div></div>
+      <div class="head"><h2>Welcome</h2><div class="divider"><svg viewBox="0 0 24 24"><use href="#heart"/></svg></div></div>
       <div id="welcomeText"></div>
       <div class="invite-line">
         <p class="small" id="inviteLead"></p>
@@ -294,7 +294,6 @@
     <div class="wrap">
       <div class="head"><p class="eyebrow">A little glimpse</p><h2>Gallery</h2><div class="divider"><svg viewBox="0 0 24 24"><use href="#heart"/></svg></div></div>
       <div class="gallery" id="galleryGrid"></div>
-      <p class="gallery-note" id="galleryText"></p>
     </div>
   </section>
 
@@ -374,7 +373,7 @@ const WEDDING = {
 
   ceremony: [
     "We're celebrating over two days. First comes our traditional marriage, full of colour, music, palm wine and the families who raised us. The very next day, we'll stand before God in church and make the promises we've been waiting a long time to make.",
-    "Both days will be full of joy, food, dancing and the people we love most. We'd be honoured to have you at either, or better still, both!"
+    "Both days will be full of joy, food, dancing and the people we love most. We'd be honoured to have you at either."
   ],
 
   days: [
@@ -408,12 +407,11 @@ const WEDDING = {
   ],
 
   // Gallery photos. "wide: true" makes a photo take a full row (two columns).
-  galleryText: "A few snapshots from our journey so far.",
+  galleryText: "",
   gallery: [
     { src: "images/gallery/01.jpg", wide: true },
     { src: "images/gallery/02.jpg" }, { src: "images/gallery/03.jpg" },
     { src: "images/gallery/04.jpg" }, { src: "images/gallery/05.jpg" },
-    { src: "images/gallery/07.jpg", wide: true },
     { src: "images/gallery/06.jpg" }, { src: "images/gallery/08.jpg" }
   ],
 
@@ -480,7 +478,6 @@ const WEDDING = {
     </article>`).join("");
 
   // Gallery + lightbox
-  $("galleryText").textContent = W.galleryText;
   const pics = W.gallery.map(g => g.src);
   $("galleryGrid").innerHTML = W.gallery.map((g, i) =>
     `<button type="button" class="${g.wide ? "wide" : ""}" data-i="${i}" aria-label="View photo ${i + 1} of ${pics.length}"><img src="${esc(g.src)}" alt="${esc(couple)}, photo ${i + 1}" loading="lazy" decoding="async"></button>`
